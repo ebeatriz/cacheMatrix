@@ -24,7 +24,7 @@ makeCacheMatrix <- function(x = matrix()) {
 ##  arguments to setinv.
 
 cacheSolve <- function(x, ...) {
-        ##  Firstly, if there is an inverse matrix already stored, cacheSolve
+        ##  Firstly, if there is an inverse matrix already stored in the cache, cacheSolve
         ##  recovers it
                 m <- x$getinv()
                 if(!is.null(m)) {
@@ -33,8 +33,8 @@ cacheSolve <- function(x, ...) {
                 }
         ## The next is a sort of else{} and return a matrix that is the inverse 
         ## of 'x'
-        data <- x$get()
-        m <- solve(data, ...)
-        x$setinv(m)
+        data <- x$get() ## this gets the matrix stored with makeCacheMatrix
+        m <- solve(data, ...) ### 'm' calculates the inverse by applying the function solve on the recovered matrix 
+        x$setinv(m) # this stores the inverse in the object generated with makeCacheMatrix
         m
 }
